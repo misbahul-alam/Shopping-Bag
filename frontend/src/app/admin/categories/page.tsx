@@ -1,10 +1,11 @@
+import DeleteCategoryButton from "@/components/actions/DeleteCategoryButton";
 import { fetchAllCategories } from "@/lib/categories";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
-import { FiEdit3, FiEye, FiTrash } from "react-icons/fi";
+import { FiEdit3, FiEye } from "react-icons/fi";
 
 export default async function page() {
   const { categories } = await fetchAllCategories();
@@ -113,12 +114,7 @@ export default async function page() {
                                 <FiEdit3 className="text-lg" />
                               </button>
 
-                              <button
-                                className="p-2 bg-red-50 rounded-md hover:bg-red-100 transition-all cursor-pointer text-red-500"
-                                aria-label="Delete"
-                              >
-                                <FiTrash className="text-lg" />
-                              </button>
+                              <DeleteCategoryButton id={category.id} />
                             </td>
                           </tr>
                         );
