@@ -7,19 +7,26 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  addProduct(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.addProduct(createProductDto);
+  @UseInterceptors(FilesInterceptor('images'))
+  addProduct(
+    @Body() createProductDto: CreateProductDto,
+    @UploadedFiles() images: Express.Multer.File[],
+  ) {
+    return this.productsService.addProduct(createProductDto, images);
   }
 
   @Get()

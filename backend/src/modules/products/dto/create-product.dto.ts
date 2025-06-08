@@ -12,18 +12,18 @@ export class CreateProductDto {
   description: string;
   @IsString({ message: 'Category ID must be a string' })
   @IsNotEmpty({ message: 'Category ID is required' })
-  @IsUUID('1', { message: 'Category ID must be a valid UUID' })
+  @IsUUID('all', { message: 'Category ID must be a valid UUID' })
   category_id: string;
   @IsDecimal(
     { decimal_digits: '0,2' },
-    { message: 'Original price must be a decimal' },
+    { message: 'Regular price must be a decimal' },
   )
-  @IsNotEmpty({ message: 'Original price is required' })
-  regular_price: number;
+  @IsNotEmpty({ message: 'Regular price is required' })
+  regular_price: string;
   @IsDecimal(
     { decimal_digits: '0,2' },
-    { message: 'Discounted price must be a decimal' },
+    { message: 'Selling price must be a decimal' },
   )
-  @IsNotEmpty({ message: 'Discounted price is required' })
-  selling_price: number;
+  @IsNotEmpty({ message: 'Selling price is required' })
+  selling_price: string;
 }

@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import Link from "next/link";
 import AdminMenu from "./AdminMenu";
 import { FiMenu } from "react-icons/fi";
+import { Toaster } from "react-hot-toast";
 
 type LayoutProps = {
   children: ReactNode;
@@ -10,6 +11,7 @@ type LayoutProps = {
 const AdminLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div>
+      <Toaster />
       <div className="h-14 bg-white border-b border-gray-200 w-full z-50 top-0 sticky flex items-center justify-between px-4">
         <Link
           href="/admin"

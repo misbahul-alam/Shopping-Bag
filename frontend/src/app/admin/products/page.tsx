@@ -1,10 +1,14 @@
+import DeleteProductButton from "@/components/actions/DeleteProductButton";
+import { fetchAllProducts } from "@/lib/products";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
 import { FiEdit3, FiEye, FiTrash } from "react-icons/fi";
 
-export default function page() {
+export default async function page() {
+  const { products } = await fetchAllProducts();
   return (
     <div className="overflow-hidden">
       <div className="flex items-center justify-between">
@@ -75,39 +79,44 @@ export default function page() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 ">
-                      <tr>
-                        <td className="px-4 py-1 text-sm font-medium text-gray-800 flex items-center gap-2  w-full max-w-[80vw] md:max-w-[40vw] ">
-                          <img
-                            src="https://nexus.daisyui.com/images/apps/ecommerce/products/2.jpg"
-                            alt="Image"
-                            className="h-10 w-10 object-cover object-center shadow-sm rounded-sm"
-                          />
-                          <span className="line-clamp-2 ">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. Repellat voluptatem mollitia assumenda
-                            inventore natus porro quam obcaecati dolorum
-                            perspiciatis distinctio!
-                          </span>
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                          Fashion
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                          $95.68
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-end text-sm font-medium flex gap-2 justify-end items-center">
-                          <button className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer">
-                            <FiEye className="text-lg" />
-                          </button>
-                          <button className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer">
-                            <FiEdit3 className="text-lg" />
-                          </button>
+                      {products.map((product, index) => {
+                        return (
+                          <tr key={index}>
+                            <td className="px-4 py-1 text-sm font-medium text-gray-800 flex items-center gap-2  w-full max-w-[80vw] md:max-w-[40vw] ">
+                              <Image
+                                src={
+                                  product.images.length != 0
+                                    ? product?.images[0]?.url
+                                    : "https://nexus.daisyui.com/images/apps/ecommerce/products/2.jpg"
+                                }
+                                width={50}
+                                height={50}
+                                alt="Image"
+                                className="h-10 w-10 object-cover object-center shadow-sm rounded-sm"
+                              />
+                              <span className="line-clamp-2 ">
+                                {product.name}
+                              </span>
+                            </td>
+                            <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
+                              {product?.category?.name || "Uncategorized"}
+                            </td>
+                            <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
+                              $95.68
+                            </td>
+                            <td className="px-4 py-1 whitespace-nowrap text-end text-sm font-medium flex gap-2 justify-end items-center">
+                              <button className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer">
+                                <FiEye className="text-lg" />
+                              </button>
+                              <button className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer">
+                                <FiEdit3 className="text-lg" />
+                              </button>
 
-                          <button className="p-2 bg-red-50 rounded-md hover:bg-red-100 transition-all cursor-pointer text-red-500">
-                            <FiTrash className="text-lg" />
-                          </button>
-                        </td>
-                      </tr>
+                              <DeleteProductButton id={product.id} />
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
