@@ -5,10 +5,12 @@ import Link from "next/link";
 import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
-import { FiEdit3, FiEye, FiTrash } from "react-icons/fi";
+import { FiEdit3, FiEye } from "react-icons/fi";
 
 export default async function page() {
-  const { products } = await fetchAllProducts();
+  const { products, page, limit, total, total_page } = await fetchAllProducts({
+    limit: 1,
+  });
   return (
     <div className="overflow-hidden">
       <div className="flex items-center justify-between">
@@ -125,7 +127,9 @@ export default async function page() {
                     <button className="join-item btn bg-white">1</button>
                     <button className="join-item btn  btn-active">2</button>
                     <button className="join-item btn bg-white">3</button>
-                    <button className="join-item btn bg-white">4</button>
+                    <button className="join-item btn bg-white">
+                      {total_page}
+                    </button>
                   </div>
                 </div>
               </div>

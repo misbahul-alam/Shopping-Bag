@@ -94,7 +94,14 @@ export class ProductsService {
       skip: (page - 1) * limit,
       take: limit,
     });
-    return { page, limit, data: products };
+    const totalProducts = await this.productRepository.count();
+    return {
+      page,
+      limit,
+      total: totalProducts,
+      total_page: Math.ceil(totalProducts / limit),
+      data: products,
+    };
   }
 
   async findById(id: string) {

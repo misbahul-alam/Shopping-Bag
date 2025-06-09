@@ -15,10 +15,19 @@ interface ProductResponse {
   data: Product[];
   limit: number;
   page: number;
+  total: number;
+  total_page: number;
 }
-export const fetchAllProducts = async () => {
+export interface PaginationInterface {
+  limit?: number;
+  page?: number;
+}
+export const fetchAllProducts = async ({
+  limit = 10,
+  page = 1,
+}: PaginationInterface) => {
   try {
-    const response = await axios.get("/products");
+    const response = await axios.get("/products", { params: { limit, page } });
     console.log("response", response.data);
     if (response.status === 200) {
       const products = response.data as ProductResponse;
@@ -26,6 +35,8 @@ export const fetchAllProducts = async () => {
         products: products.data,
         limit: products.limit,
         page: products.page,
+        total: products.total,
+        total_page: products.total_page,
         message: "Products fetched successfully",
       };
     }

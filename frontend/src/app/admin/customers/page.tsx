@@ -1,10 +1,11 @@
+import { fetchAllUsers } from "@/lib/users";
 import Link from "next/link";
 import React from "react";
 import { CiSearch } from "react-icons/ci";
-import { FaPlus } from "react-icons/fa";
-import { FiEdit3, FiEye, FiTrash } from "react-icons/fi";
+import { FiTrash } from "react-icons/fi";
 
-export default function () {
+export default async function () {
+  const { users, page, limit, total, total_page } = await fetchAllUsers({});
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -37,12 +38,6 @@ export default function () {
                       <CiSearch className="size-4 text-gray-400 " />
                     </div>
                   </div>
-                  <Link href={"/admin/categories/add"}>
-                    <button className="text-sm rounded-sm shadow-sm cursor-pointer bg-blue-500 text-gray-100 px-3 py-1.5 flex gap-2 items-center font-lg">
-                      <FaPlus />
-                      <span> Add Customer</span>
-                    </button>
-                  </Link>
                 </div>
                 <div className="overflow-hidden border-b border-gray-100">
                   <table className="min-w-full divide-y divide-gray-100 ">
@@ -81,30 +76,37 @@ export default function () {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 ">
-                      <tr>
-                        <td className="px-4 py-1 text-sm font-medium text-gray-800 flex items-center gap-2 ">
-                          <img
-                            src="https://nexus.daisyui.com/images/apps/ecommerce/products/2.jpg"
-                            alt="Image"
-                            className="h-10 w-10 object-cover object-center shadow-sm rounded-sm"
-                          />
-                          <span className="line-clamp-2 ">Misbahul Alam</span>
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                          misbahulalam@gmail.com
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                          15
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                          14 days
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-end text-sm font-medium flex gap-2 justify-end items-center">
-                          <button className="p-2 bg-red-50 rounded-md hover:bg-red-100 transition-all cursor-pointer text-red-500">
-                            <FiTrash className="text-lg" />
-                          </button>
-                        </td>
-                      </tr>
+                      {users.map((user) => (
+                        <tr>
+                          <td
+                            className="px-4 py-1 text-sm font-medium text-gray-800 flex items-center gap-2 "
+                            key={user.id}
+                          >
+                            <img
+                              src="https://nexus.daisyui.com/images/apps/ecommerce/products/2.jpg"
+                              alt="Image"
+                              className="h-10 w-10 object-cover object-center shadow-sm rounded-sm"
+                            />
+                            <span className="line-clamp-2 ">
+                              {user.first_name + " " + user.last_name}
+                            </span>
+                          </td>
+                          <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
+                            {user.email}
+                          </td>
+                          <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
+                            15
+                          </td>
+                          <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
+                            {user.created_at} days
+                          </td>
+                          <td className="px-4 py-1 whitespace-nowrap text-end text-sm font-medium flex gap-2 justify-end items-center">
+                            <button className="p-2 bg-red-50 rounded-md hover:bg-red-100 transition-all cursor-pointer text-red-500">
+                              <FiTrash className="text-lg" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
