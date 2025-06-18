@@ -4,7 +4,10 @@ import { fetchAllProducts } from "@/lib/products";
 import React from "react";
 
 export default async function Shop() {
-  const { products } = await fetchAllProducts();
+  const { products } = await fetchAllProducts({
+    limit: 20,
+    page: 1,
+  });
   return (
     <MainLayout>
       <div className="layout">

@@ -28,7 +28,6 @@ export const fetchAllProducts = async ({
 }: PaginationInterface) => {
   try {
     const response = await axios.get("/products", { params: { limit, page } });
-    console.log("response", response.data);
     if (response.status === 200) {
       const products = response.data as ProductResponse;
       return {
@@ -58,6 +57,30 @@ export const fetchProductById = async (id: string) => {
     return { products: [], message: "No categories found" };
   } catch (error) {
     return { products: [], message: "Something went wrong!" };
+  }
+};
+export const fetchProductBySlug = async (slug: string) => {
+  try {
+    const response = await axios.get("/products/slug/" + slug);
+    if (response.status === 200) {
+      return {
+        products: response.data as Product,
+        status: response.status,
+        message: "Products fetched successfully",
+      };
+    }
+
+    return {
+      products: {} as Product,
+      status: response.status,
+      message: "No categories found",
+    };
+  } catch (error) {
+    return {
+      products: {} as Product,
+      status: 500,
+      message: "Something went wrong!",
+    };
   }
 };
 

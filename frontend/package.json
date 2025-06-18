@@ -16,6 +16,7 @@
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
+    "swiper": "^11.2.8",
     "tailwind-merge": "^3.2.0",
     "zustand": "^5.0.5"
   },
@@ -25,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/swiper": "^5.4.3",
     "daisyui": "^5.0.35",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",

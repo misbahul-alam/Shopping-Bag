@@ -37,6 +37,7 @@ export default function Header() {
         <div className="flex gap-6">
           <Link
             href="/"
+            scroll={false}
             className="flex items-center gap-2 uppercase font-medium text-4xl"
           >
             <img
@@ -52,6 +53,7 @@ export default function Header() {
             <li className="flex items-center">
               <Link
                 href="/"
+                scroll={false}
                 className="text-[17px] font-medium text-gray-700 px-2 hover:text-gray-950 transition-all"
               >
                 Home
@@ -60,6 +62,7 @@ export default function Header() {
             <li className="flex items-center">
               <Link
                 href="/shop"
+                scroll={false}
                 className="text-[17px] font-medium text-gray-700 px-2 hover:text-gray-950 transition-all"
               >
                 Shop
@@ -76,6 +79,7 @@ export default function Header() {
             <li className="flex items-center">
               <Link
                 href="/login"
+                scroll={false}
                 className="text-[17px] font-medium text-gray-700 px-2 hover:text-gray-950 transition-all"
               >
                 Login
@@ -84,6 +88,7 @@ export default function Header() {
             <li className="flex items-center">
               <Link
                 href="/register"
+                scroll={false}
                 className="text-[17px] font-medium text-gray-700 px-2 hover:text-gray-950 transition-all"
               >
                 Register

@@ -33,14 +33,14 @@ export class ProductsController {
   findAllProduct(@Query() paginationDto: PaginationDto) {
     return this.productsService.findAllProduct(paginationDto);
   }
+  @Get('slug/:slug')
+  findBySlug(@Param('slug') slug: string) {
+    return this.productsService.findBySlug(slug);
+  }
 
   @Get(':id')
   findById(@Param('id') id: string) {
     return this.productsService.findById(id);
-  }
-  @Get('slug/:id')
-  findBySlug(@Param('slug') slug: string) {
-    return this.productsService.findBySlug(slug);
   }
 
   @Patch(':id')

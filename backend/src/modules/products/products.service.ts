@@ -114,7 +114,11 @@ export class ProductsService {
   }
 
   async findBySlug(slug: string) {
+    if (!slug) {
+      throw new BadRequestException('Slug is required');
+    }
     const product = await this.productRepository.findOneBy({ slug });
+    console.log('product', product);
 
     if (!product) {
       throw new NotFoundException(`Product not found`);
