@@ -9,7 +9,7 @@ import { FiEdit3, FiEye } from "react-icons/fi";
 
 export default async function page() {
   const { products, page, limit, total, total_page } = await fetchAllProducts({
-    limit: 1,
+    limit: 20,
   });
   return (
     <div className="overflow-hidden">
@@ -104,7 +104,7 @@ export default async function page() {
                               {product?.category?.name || "Uncategorized"}
                             </td>
                             <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                              $95.68
+                              ${product.selling_price}
                             </td>
                             <td className="px-4 py-1 whitespace-nowrap text-end text-sm font-medium flex gap-2 justify-end items-center">
                               <button className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer">

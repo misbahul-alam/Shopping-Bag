@@ -1,18 +1,34 @@
 import MainLayout from "@/components/layouts/MainLayout";
-import Button from "@/components/widgets/Button";
-import TextField from "@/components/widgets/TextField";
-import React from "react";
+import ShoppingBag from "@/images/shopping-bags.svg";
+import Image from "next/image";
 export default function Home() {
   return (
     <MainLayout>
-      <div className="flex flex-col gap-4 bg-[url(../images/hero.png)] w-full bg-cover bg-no-repeat bg-center py-24 layout">
-        <h1 className="text-2xl font-bold">Shopping Bag</h1>
-        <p className="text-gray-700 text-sm">
-          A shopping bag app built with Next.js and Chakra UI
-        </p>
-        <Button label={"Add To Cart"} />
-        <TextField label={"Search"} name="search" />
-      </div>
+      <section className="layout min-height screen-height flex justify-between gap-3 items-center ">
+        <div>
+          <h1 className="text-3xl text-gray-900 font-semibold mb-4 leading-snug">
+            Everything You Need.
+            <br />
+            Nothing You Don’t.
+          </h1>
+          <p className="text-gray-700 mb-6">
+            Discover carefully curated products that elevate your everyday —
+            quality essentials, thoughtful design, and seamless shopping in one
+            clean experience.
+          </p>
+          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+            Shop Now
+          </button>
+        </div>
+        <div>
+          <Image
+            src={ShoppingBag}
+            alt="Hero Image"
+            className="h-full max-h-96"
+          />
+        </div>
+      </section>
+      <section></section>
     </MainLayout>
   );
 }

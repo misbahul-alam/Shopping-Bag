@@ -33,7 +33,7 @@ export default function Header() {
           </li>
         </ul>
       </div>
-      <div className="layout h-14 w-full border-b border-gray-100 flex items-center justify-between">
+      <div className="layout h-14 w-full border-b border-gray-100 flex gap-3 items-center justify-between">
         <div className="flex gap-6">
           <Link
             href="/"

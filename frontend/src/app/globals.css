@@ -9,4 +9,8 @@
   .min-height {
     min-height: calc(100vh - 5.5rem); /* raw CSS is fine here */
   }
+
+  .screen-height {
+    height: calc(100vh - 5.5rem); /* raw CSS is fine here */
+  }
 }

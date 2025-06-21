@@ -51,6 +51,9 @@ export class Product {
   @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
   orders: OrderItem[];
 
+  @Column({ default: false })
+  is_featured: boolean;
+
   @CreateDateColumn()
   created_at: Date;
   @UpdateDateColumn()
