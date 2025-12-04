@@ -1,8 +1,7 @@
-import { integer } from 'drizzle-orm/pg-core';
-import { serial } from 'drizzle-orm/pg-core';
-import { pgTable } from 'drizzle-orm/pg-core';
+import { pgTable, text, serial, integer } from 'drizzle-orm/pg-core';
 import { products, users } from './schema';
 import { relations } from 'drizzle-orm/relations';
+import { varchar } from 'drizzle-orm/pg-core';
 export const reviews = pgTable('reviews', {
   id: serial('id').primaryKey(),
   user_id: integer('user_id')
@@ -16,8 +15,8 @@ export const reviews = pgTable('reviews', {
     })
     .notNull(),
   rating: integer('rating').notNull(),
-  comment: integer('comment').notNull(),
-  image: integer('image'),
+  comment: text('comment').notNull(),
+  image: varchar('image', { length: 255 }),
 });
 
 export const reviewRelations = relations(reviews, ({ one }) => ({

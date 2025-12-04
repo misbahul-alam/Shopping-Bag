@@ -3,7 +3,7 @@ import { products } from './products.schema';
 import { users } from './users.schema';
 import { relations } from 'drizzle-orm';
 
-export const carts = pgTable('carts', {
+export const cartItems = pgTable('cart_items', {
   id: serial('id').primaryKey(),
   product_id: integer('product_id')
     .references(() => products.id)
@@ -14,13 +14,13 @@ export const carts = pgTable('carts', {
   quantity: integer('quantity').default(1).notNull(),
 });
 
-export const cartRelations = relations(carts, ({ one }) => ({
+export const cartItemsRelations = relations(cartItems, ({ one }) => ({
   product: one(products, {
-    fields: [carts.product_id],
+    fields: [cartItems.product_id],
     references: [products.id],
   }),
   user: one(users, {
-    fields: [carts.user_id],
+    fields: [cartItems.user_id],
     references: [users.id],
   }),
 }));

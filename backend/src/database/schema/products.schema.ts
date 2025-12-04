@@ -27,7 +27,7 @@ export const products = pgTable('products', {
     precision: 10,
     scale: 2,
   }).notNull(),
-  category: integer('category')
+  category_id: integer('category_id')
     .references(() => categories.id)
     .notNull(),
   in_stock: boolean('in_stock').default(true).notNull(),
@@ -38,7 +38,7 @@ export const products = pgTable('products', {
 
 export const productRelations = relations(products, ({ one, many }) => ({
   category: one(categories, {
-    fields: [products.category],
+    fields: [products.category_id],
     references: [categories.id],
   }),
   reviews: many(reviews),

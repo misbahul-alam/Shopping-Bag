@@ -5,9 +5,9 @@ import {
   timestamp,
   pgEnum,
   decimal,
+  varchar,
 } from 'drizzle-orm/pg-core';
 import { users } from './users.schema';
-import { addresses } from './address.schema';
 import { relations } from 'drizzle-orm';
 import { orderItems } from './order-items.schema';
 
@@ -26,9 +26,7 @@ export const orders = pgTable('orders', {
     .references(() => users.id)
     .notNull(),
   status: orderStatusEmun('status').default('pending').notNull(),
-  address_id: integer('address_id')
-    .references(() => addresses.id)
-    .notNull(),
+
   shipping: decimal('shipping', {
     precision: 10,
     scale: 2,
@@ -49,18 +47,28 @@ export const orders = pgTable('orders', {
     precision: 10,
     scale: 2,
   }).notNull(),
+
+  shipping_name: varchar('shipping_name', { length: 100 }).notNull(),
+  shipping_phone: varchar('shipping_phone', { length: 20 }).notNull(),
+  shipping_street: varchar('shipping_street', { length: 100 }).notNull(),
+  shipping_city: varchar('shipping_city', { length: 50 }).notNull(),
+  shipping_state: varchar('shipping_state', { length: 50 }),
+  shipping_postal_code: varchar('shipping_postal_code', {
+    length: 20,
+  }).notNull(),
+  shipping_country: varchar('shipping_country', { length: 50 }).notNull(),
+
   created_at: timestamp('created_at').defaultNow().notNull(),
-  updated_at: timestamp('updated_at').defaultNow().notNull(),
+  updated_at: timestamp('updated_at')
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
 });
 
 export const ordersRelations = relations(orders, ({ one, many }) => ({
   user: one(users, {
     fields: [orders.user_id],
     references: [users.id],
-  }),
-  address: one(addresses, {
-    fields: [orders.address_id],
-    references: [addresses.id],
   }),
 
   order_items: many(orderItems),
