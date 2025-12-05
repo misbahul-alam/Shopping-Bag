@@ -1,6 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { integer } from 'drizzle-orm/pg-core';
-import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
 
 export const categories = pgTable('categories', {
   id: serial('id').primaryKey(),
@@ -15,5 +14,8 @@ export const categoryRelations = relations(categories, ({ one, many }) => ({
     fields: [categories.parent_id],
     references: [categories.id],
   }),
-  subcategories: many(categories),
+
+  subcategories: many(categories, {
+    relationName: 'subcategories',
+  }),
 }));
