@@ -8,6 +8,13 @@
       "when": 1764845272104,
       "tag": "0000_rare_midnight",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1765126332621,
+      "tag": "0001_clean_scrambler",
+      "breakpoints": true
     }
   ]
 }
