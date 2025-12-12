@@ -11,7 +11,7 @@ import { RegisterDto } from './dto/register.dto';
 import { eq } from 'drizzle-orm';
 import { users } from 'src/database/schema/users.schema';
 import * as bcrypt from 'bcrypt';
-import { CustomJwtPayload } from 'src/common/interfaces/jwt-payload.interface';
+import { CustomJwtPayload } from 'src/core/interfaces/jwt-payload.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()

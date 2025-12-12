@@ -6,7 +6,7 @@ import {
   IsStrongPassword,
   MinLength,
 } from 'class-validator';
-import { Match } from 'src/common/decorators/match.decorator';
+import { Match } from 'src/core/decorators/match.decorator';
 
 export class RegisterDto {
   @IsNotEmpty({ message: 'First name is required' })
